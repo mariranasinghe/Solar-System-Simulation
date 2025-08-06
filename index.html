@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar System Simulation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="container">
+        <canvas id="canvas"></canvas>
+        
+        <!-- Left Control Panel -->
+        <div class="control-panel left-panel" id="leftPanel">
+            <div class="panel-header" onclick="togglePanel('leftPanel')">
+                <span class="chevron" id="leftChevron">▼</span>
+                <h2>Solar System Controls</h2>
+            </div>
+            <div class="panel-content" id="leftContent">
+                <div class="control-group">
+                    <label>View Mode</label>
+                    <div class="button-group">
+                        <button class="btn active" id="wireframeBtn" onclick="setViewMode('wireframe')">Wireframe</button>
+                        <button class="btn" id="solidBtn" onclick="setViewMode('solid')">Solid</button>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label>Orbital Speed: <span id="speedValue">1.0</span>x</label>
+                    <input type="range" id="speedSlider" min="0.1" max="5.0" step="0.1" value="1.0" oninput="updateSpeed(this.value)">
+                </div>
+                
+                <div class="control-group">
+                    <label>Gravitational Pull: <span id="gravityValue">1.0</span>x</label>
+                    <input type="range" id="gravitySlider" min="0.1" max="3.0" step="0.1" value="1.0" oninput="updateGravity(this.value)">
+                </div>
+                
+                <div class="control-group">
+                    <label>
+                        <input type="checkbox" id="showOrbits" checked onchange="toggleOrbits(this.checked)">
+                        Show Orbital Paths
+                    </label>
+                </div>
+                
+                <div class="info">
+                    <p>• Planets orbit at realistic relative speeds</p>
+                    <p>• Speed controls overall system velocity</p>
+                    <p>• Gravity affects moon orbital radius</p>
+                    <p>• Use mouse to rotate, zoom, and pan</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Control Panel -->
+        <div class="control-panel right-panel" id="rightPanel">
+            <div class="panel-header" onclick="togglePanel('rightPanel')">
+                <span class="chevron" id="rightChevron">▼</span>
+                <h2>Planets & Moons</h2>
+            </div>
+            <div class="panel-content" id="rightContent">
+                <div class="planet-list">
+                    <div class="planet-item">
+                        <label>
+                            <input type="checkbox" id="showSun" onchange="toggleSun(this.checked)">
+                            ☀️ Sun
+                        </label>
+                    </div>
+                    <div class="planet-item">
+                        <label>
+                            <input type="checkbox" id="showMercury" onchange="togglePlanet('mercury', this.checked)">
+                            🪐 Mercury
+                        </label>
+                    </div>
+                    <div class="planet-item">
+                        <label>
+                            <input type="checkbox" id="showVenus" onchange="togglePlanet('venus', this.checked)">
+                            🪐 Venus
+                        </label>
+                    </div>
+                    <div class="planet-item">
+                        <label>
+                            <input type="checkbox" id="showEarth" checked onchange="togglePlanet('earth', this.checked)">
+                            🪐 Earth
+                        </label>
+                        <div class="moon-info">Moons: Moon</div>
+                    </div>
+                    <div class="planet-item">
+                        <label>
+                            <input type="checkbox" id="showMars" onchange="togglePlanet('mars', this.checked)">
+                            🪐 Mars
+                        </label>
+                        <div class="moon-info">Moons: Phobos, Deimos</div>
+                    </div>
+                    <div class="planet-item">
+                        <label>
+                            <input type="checkbox" id="showJupiter" onchange="togglePlanet('jupiter', this.checked)">
+                            🪐 Jupiter
+                        </label>
+                        <div class="moon-info">Moons: Io, Europa, Ganymede, Callisto</div>
+                    </div>
+                    <div class="planet-item">
+                        <label>
+                            <input type="checkbox" id="showSaturn" onchange="togglePlanet('saturn', this.checked)">
+                            🪐 Saturn
+                        </label>
+                        <div class="moon-info">Moons: Titan</div>
+                    </div>
+                    <div class="planet-item">
+                        <label>
+                            <input type="checkbox" id="showUranus" onchange="togglePlanet('uranus', this.checked)">
+                            🪐 Uranus
+                        </label>
+                        <div class="moon-info">Moons: Miranda, Ariel</div>
+                    </div>
+                    <div class="planet-item">
+                        <label>
+                            <input type="checkbox" id="showNeptune" onchange="togglePlanet('neptune', this.checked)">
+                            🪐 Neptune
+                        </label>
+                        <div class="moon-info">Moons: Triton</div>
+                    </div>
+                </div>
+                
+                <div class="info">
+                    <p>• Planets shown with major moons</p>
+                    <p>• Relative sizes and distances</p>
+                    <p>• Realistic orbital mechanics</p>
+                    <p>• Toggle individual planets</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
